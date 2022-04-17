@@ -1,9 +1,10 @@
 import './App.css';
+import { IssuesTable } from './components/IssuesTable';
 
 function App() {
   return (
     <div className="App">
-      <p>Dashboard</p>
+      <IssuesTable />
     </div>
   );
 }
