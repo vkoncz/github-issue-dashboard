@@ -13,5 +13,6 @@
     "[typescript][typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
-    "jest.autoRun": null
+    "jest.autoRun": null,
+    "jest.jestCommandLine": "npm run test --"
 }

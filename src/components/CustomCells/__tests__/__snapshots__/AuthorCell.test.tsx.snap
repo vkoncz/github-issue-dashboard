@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthorCell should contains a link 1`] = `
+<div>
+  <span>
+    <a
+      href="https://"
+      rel="noreferrer"
+      target="_blank"
+    >
+      user name
+    </a>
+  </span>
+</div>
+`;
+
+exports[`AuthorCell should handle undefine value without generate link 1`] = `
+<div>
+  <span>
+    <a
+      rel="noreferrer"
+      target="_blank"
+    />
+  </span>
+</div>
+`;

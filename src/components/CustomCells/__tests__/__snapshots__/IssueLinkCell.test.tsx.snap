@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IssueLinkCell should contains a link 1`] = `
+<div>
+  <span>
+    <a
+      href="https://"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Open issue
+    </a>
+  </span>
+</div>
+`;
+
+exports[`IssueLinkCell should handle undefine value without generate link 1`] = `<div />`;
