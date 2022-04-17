@@ -1,4 +1,4 @@
-import { IssuesTable } from './components/IssuesTable';
+import { IssuesTable } from './components/IssuesTable/IssuesTable';
 
 function App() {
   return <IssuesTable />;
