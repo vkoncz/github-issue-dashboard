@@ -7,7 +7,13 @@ export interface Repository {
 }
 
 export interface Issues {
+  pageInfo: PageInfo;
+  totalCount: number;
   nodes: Node[];
+}
+
+export interface PageInfo {
+  endCursor: string;
 }
 
 export interface Node {

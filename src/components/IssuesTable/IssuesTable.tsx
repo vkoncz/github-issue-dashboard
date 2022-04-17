@@ -1,5 +1,6 @@
-import type { ColDef } from 'ag-grid-community';
+import type { ColDef, IDatasource } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { useMemo, useRef } from 'react';
 
 import type { Node } from '../../graphql-client/github-client.model';
 import { useGithubIssuesQuery } from '../../graphql-client/github-issues.query';
@@ -17,13 +18,41 @@ const columnDefs: IssueColDef[] = [
   { field: 'url', cellRenderer: IssueLinkCell },
 ];
 
+const numberOfLines = 30;
+
 export function IssuesTable() {
-  const { loading, data } = useGithubIssuesQuery();
-  const rowData = data?.repository.issues.nodes;
+  const cursor = useRef<undefined | string>();
+  const [getIssues] = useGithubIssuesQuery({});
+
+  const datasource = useMemo<IDatasource>(
+    () => ({
+      getRows: async params => {
+        const result = await getIssues({
+          variables: { afterCursor: cursor.current, blockSize: numberOfLines },
+        });
+
+        const issues = result.data?.repository.issues;
+        if (!issues) return;
+
+        const lastRow = issues.pageInfo.endCursor ? undefined : issues.totalCount;
+        params.successCallback(issues.nodes, lastRow);
+        cursor.current = issues.pageInfo.endCursor;
+      },
+    }),
+    [getIssues],
+  );
 
   return (
     <div className={`${styles.tableContainer} ag-theme-alpine`}>
-      {!loading && <AgGridReact rowData={rowData} columnDefs={columnDefs} />}
+      <AgGridReact
+        columnDefs={columnDefs}
+        rowBuffer={0}
+        gridOptions={{
+          rowModelType: 'infinite',
+          datasource,
+          cacheBlockSize: numberOfLines,
+        }}
+      />
     </div>
   );
 }
