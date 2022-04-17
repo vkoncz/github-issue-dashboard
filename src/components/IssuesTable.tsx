@@ -1,9 +1,7 @@
-import { useQuery } from '@apollo/client';
-
-import { githubIssueQuery } from '../graphql-client/github-issues.query';
+import { useGithubIssuesQuery } from '../graphql-client/github-issues.query';
 
 export function IssuesTable() {
-  const { loading, data } = useQuery(githubIssueQuery);
+  const { loading, data } = useGithubIssuesQuery();
 
   return <p>{!loading && JSON.stringify(data)}</p>;
 }
