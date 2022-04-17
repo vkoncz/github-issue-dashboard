@@ -17,16 +17,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env TSC_COMPILE_ON_ERROR=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "tsc && eslint src",
+    "lint:fix": "tsc && eslint src --fix"
   },
   "browserslist": {
     "production": [
@@ -39,5 +35,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint-config-universe": "^11.0.0-beta.0",
+    "prettier": "^2.6.2"
   }
 }
